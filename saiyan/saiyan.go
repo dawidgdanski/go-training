@@ -46,3 +46,11 @@ func NewSaiyanCopy(name string, power int) Saiyan {
 		Power:  power,
 	}
 }
+
+func ExtractPowers(saiyans []*Saiyan) []int {
+	powers := make([]int, len(saiyans))
+	for index, saiyanElement := range saiyans {
+		powers[index] = saiyanElement.Power
+	}
+	return powers
+}

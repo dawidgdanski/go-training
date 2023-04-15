@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"go-training/datastructures"
+	"go-training/mathsamples"
 	"go-training/person"
 	"go-training/saiyan"
 	"os"
@@ -14,6 +16,7 @@ func main() {
 	power := getPower()
 	fmt.Printf("Hello power %d!\n", power)
 	gokuPower()
+	datastructures.ArrayInitialized()
 	newPower, exists := calculatePower("")
 	if exists {
 		fmt.Printf("New Power = %d\n", newPower)
@@ -30,6 +33,14 @@ func main() {
 	fmt.Println("Nothing changes,", goku)
 	PointerOperation(&goku)
 	fmt.Println("Changed", goku)
+	datastructures.SliceInitializedUsingMake()
+	datastructures.SliceInitializedAndResized()
+	datastructures.SliceEnlargedWithDoubleLengthViaAppend()
+	datastructures.SliceInitializationMethods()
+	fmt.Println("Powers extracted", saiyan.ExtractPowers([]*saiyan.Saiyan{&goku}))
+	datastructures.SliceModifyingSourceArray()
+	datastructures.StringSliceManipulation()
+	mathsamples.WorstScores()
 }
 
 func printArguments() {
