@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"go-training/datastructures"
+	"go-training/logging"
 	"go-training/mathsamples"
 	"go-training/person"
 	"go-training/saiyan"
@@ -43,6 +44,7 @@ func main() {
 	mathsamples.WorstScores()
 	datastructures.MapSimpleCreationExample()
 	datastructures.MapAnotherCreationAndInterationExample()
+	logging.ProcessViaConsole()
 }
 
 func printArguments() {
