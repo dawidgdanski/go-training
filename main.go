@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"go-training/datastructures"
+	"go-training/errorhandling"
 	"go-training/logging"
 	"go-training/mathsamples"
 	"go-training/person"
@@ -45,6 +46,10 @@ func main() {
 	datastructures.MapSimpleCreationExample()
 	datastructures.MapAnotherCreationAndInterationExample()
 	logging.ProcessViaConsole()
+	errorhandling.ParseAndPrintNumberOrLogError("234")
+	errorhandling.ParseAndPrintNumberOrLogError("hello")
+	fmt.Println("ERROR:", errorhandling.Process(0))
+	//errorhandling.ScanInput()
 }
 
 func printArguments() {
