@@ -7,6 +7,10 @@ import (
 	"strconv"
 )
 
+func init() {
+	fmt.Println("HELLO from errorhandling package!")
+}
+
 func ParseAndPrintNumberOrLogError(input string) {
 	n, err := strconv.Atoi(input)
 	if err != nil {
