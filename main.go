@@ -8,6 +8,7 @@ import (
 	"go-training/mathsamples"
 	"go-training/person"
 	"go-training/saiyan"
+	"go-training/syntaxsamples"
 	"os"
 )
 
@@ -49,6 +50,7 @@ func main() {
 	errorhandling.ParseAndPrintNumberOrLogError("234")
 	errorhandling.ParseAndPrintNumberOrLogError("hello")
 	fmt.Println("ERROR:", errorhandling.Process(0))
+	syntaxsamples.Hello()
 	//errorhandling.ScanInput()
 	//written, err := filesystem.CopyFile("Hello", "There")
 	//fmt.Println("File copying result:", written, err)
