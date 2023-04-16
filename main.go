@@ -100,3 +100,10 @@ func PointerOperation(ref *saiyan.Saiyan) {
 func privateFunction() {
 	fmt.Println("This function is private to the main package only")
 }
+
+func functionWithNamedReturnArguments(a, b int) (mul, div int) {
+	//https://www.geeksforgeeks.org/named-return-parameters-in-golang/
+	mul = a * b
+	div = a / b
+	return
+}
