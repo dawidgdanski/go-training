@@ -50,6 +50,8 @@ func main() {
 	errorhandling.ParseAndPrintNumberOrLogError("hello")
 	fmt.Println("ERROR:", errorhandling.Process(0))
 	//errorhandling.ScanInput()
+	//written, err := filesystem.CopyFile("Hello", "There")
+	//fmt.Println("File copying result:", written, err)
 }
 
 func printArguments() {
@@ -93,4 +95,8 @@ func CopiedArgumentOperation(copy saiyan.Saiyan) {
 
 func PointerOperation(ref *saiyan.Saiyan) {
 	ref.Power += 10000
+}
+
+func privateFunction() {
+	fmt.Println("This function is private to the main package only")
 }

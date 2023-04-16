@@ -31,3 +31,7 @@ func ScanInput() {
 		fmt.Println("No more input!")
 	}
 }
+
+func privateFunction() {
+	fmt.Println("This function is private to the 'stdin' package only")
+}
