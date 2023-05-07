@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go-training/concurrency"
 	"go-training/datastructures"
 	"go-training/errorhandling"
 	"go-training/logging"
@@ -51,6 +52,7 @@ func main() {
 	errorhandling.ParseAndPrintNumberOrLogError("hello")
 	fmt.Println("ERROR:", errorhandling.Process(0))
 	syntaxsamples.Hello()
+	concurrency.HelloFromConcurrency()
 	//errorhandling.ScanInput()
 	//written, err := filesystem.CopyFile("Hello", "There")
 	//fmt.Println("File copying result:", written, err)
