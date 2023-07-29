@@ -52,7 +52,7 @@ func incrSynchronized() {
 }
 
 func simpleChannelExample() {
-	c := make(chan int)
+	c := make(chan int, 10)
 	finish := make(chan bool)
 	waitGroup := sync.WaitGroup{}
 	workerCount := 5
