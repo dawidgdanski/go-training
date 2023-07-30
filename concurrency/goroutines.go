@@ -17,6 +17,7 @@ func init() {
 		incrSynchronized()
 	})
 	simpleChannelExample()
+	timeoutChannelExample()
 }
 
 func HelloFromConcurrency() {
@@ -70,6 +71,35 @@ func simpleChannelExample() {
 	close(c)
 	close(finish)
 	waitGroup.Wait()
+}
+
+func timeoutChannelExample() {
+	fmt.Println("\n=========== Timeout Channel Example ===========")
+	channel1 := make(chan string, 1)
+	go func() {
+		time.Sleep(2 * time.Second)
+		channel1 <- "result 1"
+	}()
+	select {
+	case response1 := <-channel1:
+		fmt.Println(response1)
+	case <-time.After(1 * time.Second):
+		fmt.Println("timeout 1")
+	}
+
+	channel2 := make(chan string, 1)
+	go func() {
+		time.Sleep(2 * time.Second)
+		channel2 <- "result 2"
+	}()
+
+	select {
+	case response2 := <-channel2:
+		fmt.Println(response2)
+	case <-time.After(3 * time.Second):
+		fmt.Println("timeout 2")
+	}
+	fmt.Println("=========== Timeout Channel Example ===========")
 }
 
 type Worker struct {
