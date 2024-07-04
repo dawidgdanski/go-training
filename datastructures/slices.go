@@ -89,3 +89,18 @@ func StringSliceManipulation() {
 	haystack := "the spice must flow"
 	fmt.Printf("First space after 5th character (%s): %d\n", haystack[5:], strings.Index(haystack[5:], " "))
 }
+
+// SlicingSlices /** Slicing both slices and arrays shares results in creating slice or array sharing memory with the original slice or array
+func SlicingSlices() {
+	fmt.Println("====== Slicing Slices =======")
+	x := []string{"a", "b", "c", "d"}
+	y := x[:2]
+	z := x[1:]
+	d := x[1:3]
+	e := x[:]
+	fmt.Println("x:", x)
+	fmt.Println("y:", y)
+	fmt.Println("z:", z)
+	fmt.Println("d:", d)
+	fmt.Println("e:", e)
+}

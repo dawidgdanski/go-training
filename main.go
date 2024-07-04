@@ -44,6 +44,7 @@ func main() {
 	fmt.Println("Powers extracted", saiyan.ExtractPowers([]*saiyan.Saiyan{&goku}))
 	datastructures.SliceModifyingSourceArray()
 	datastructures.StringSliceManipulation()
+	datastructures.SlicingSlices()
 	mathsamples.WorstScores()
 	datastructures.MapSimpleCreationExample()
 	datastructures.MapAnotherCreationAndInterationExample()
