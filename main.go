@@ -45,6 +45,7 @@ func main() {
 	datastructures.SliceModifyingSourceArray()
 	datastructures.StringSliceManipulation()
 	datastructures.SlicingSlices()
+	datastructures.SlicingSlicesWithSharedStorage()
 	mathsamples.WorstScores()
 	datastructures.MapSimpleCreationExample()
 	datastructures.MapAnotherCreationAndInterationExample()

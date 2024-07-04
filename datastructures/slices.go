@@ -104,3 +104,19 @@ func SlicingSlices() {
 	fmt.Println("d:", d)
 	fmt.Println("e:", e)
 }
+
+// SlicingSlicesWithSharedStorage /** Slicing both slices and arrays shares results in creating slice or array sharing memory with the original slice or array
+func SlicingSlicesWithSharedStorage() {
+	fmt.Println("====== Slicing with shared storage =======")
+
+	x := []string{"a", "b", "c", "d"}
+	y := x[:2]
+	z := x[1:]
+	x[1] = "y"
+	y[0] = "x"
+	z[1] = "z"
+	fmt.Println("x:", x)
+	fmt.Println("y:", y)
+	fmt.Println("z:", z)
+	fmt.Println("=============")
+}
