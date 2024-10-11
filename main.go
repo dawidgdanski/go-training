@@ -55,6 +55,7 @@ func main() {
 	fmt.Println("ERROR:", errorhandling.Process(0))
 	syntaxsamples.Hello()
 	concurrency.HelloFromConcurrency()
+	fmt.Println("Sum of 2.0 and 3.0 is", syntaxsamples.NewCalculator().Sum(2.0, 3.0))
 	//errorhandling.ScanInput()
 	//written, err := filesystem.CopyFile("Hello", "There")
 	//fmt.Println("File copying result:", written, err)
