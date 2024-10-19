@@ -27,12 +27,12 @@ func main() {
 	}
 	//goku := Saiyan{}
 	goku := saiyan.Saiyan{
-		Person: &person.Person{Name: "Goku"},
+		Person: &person.Person{FirstName: "Goku"},
 		Power:  9000,
 	}
 	goku.SuperPower()
 	goku.WhoAmI()
-	fmt.Printf("Modifying %s's power (%d)\n", goku.Name, goku.Power)
+	fmt.Printf("Modifying %s's power (%d)\n", goku.FirstName, goku.Power)
 	CopiedArgumentOperation(goku)
 	fmt.Println("Nothing changes,", goku)
 	PointerOperation(&goku)

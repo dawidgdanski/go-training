@@ -13,20 +13,20 @@ type Saiyan struct {
 
 func (s *Saiyan) SuperPower() {
 	power := 10000
-	fmt.Printf("%s: Increasing power %d\n", s.Name, power)
+	fmt.Printf("%s: Increasing power %d\n", s.FirstName, power)
 	s.Power += power
 }
 
 func (s *Saiyan) WhoAmI() {
-	fmt.Printf("I am %s (%s)\n", s.Name, s.Person.Name)
+	fmt.Printf("I am %s (%s)\n", s.FirstName, s.Person.FirstName)
 }
 
 func NewSaiyanPointer(name string, power int) *Saiyan {
 	return &Saiyan{
-		Person: &person.Person{Name: name},
+		Person: &person.Person{FirstName: name},
 		Power:  power,
 		Ancestor: &Saiyan{
-			Person:   &person.Person{Name: "Goku"},
+			Person:   &person.Person{FirstName: "Goku"},
 			Power:    1001,
 			Ancestor: nil,
 		},
@@ -35,14 +35,14 @@ func NewSaiyanPointer(name string, power int) *Saiyan {
 
 func NewSaiyanPointerWithNew(name string, power int) *Saiyan {
 	goku := new(Saiyan)
-	goku.Name = name
+	goku.FirstName = name
 	goku.Power = power
 	return goku
 }
 
 func NewSaiyanCopy(name string, power int) Saiyan {
 	return Saiyan{
-		Person: &person.Person{Name: name},
+		Person: &person.Person{FirstName: name},
 		Power:  power,
 	}
 }

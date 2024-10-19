@@ -7,6 +7,7 @@ func init() {
 	deferFirst()
 	deferStack()
 	panicAndRecover()
+	deferExample()
 }
 
 // https://go.dev/blog/defer-panic-and-recover
@@ -45,4 +46,23 @@ func g(i int) {
 	defer fmt.Println("g: Defer in g", i)
 	fmt.Println("g: Printing in g", i)
 	g(i + 1)
+}
+
+func deferExample() int {
+	a := 10
+	defer func(val int) {
+		fmt.Println("first: ", val)
+	}(a)
+	a = 20
+	defer func(val int) {
+		fmt.Println("second: ", val)
+	}(a)
+	a = 30
+	defer func(val int) int {
+		fmt.Println("There is no way to read the value returned ", val)
+		return val
+	}(a)
+	a = 40
+	fmt.Println("exiting: ", a)
+	return a
 }
