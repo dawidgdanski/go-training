@@ -26,6 +26,8 @@ func init() {
 	result, _, _ := divAndRemainder(1, 2)
 	_, _, err := divAndRemainder(1, 0)
 	fmt.Println("Division", result, err)
+
+	closureCanModifyOuterVariable()
 }
 
 type Add func(a int, b int) int
@@ -66,4 +68,14 @@ func divAndRemainder(num, denom int) (result int, remainder int, err error) {
 	} else {
 		return num / denom, num % denom, nil
 	}
+}
+
+func closureCanModifyOuterVariable() {
+	a := 10
+	println("Before closure: ", a)
+	func() {
+		a += 20
+		println("In closure: ", a)
+	}()
+	println("After closure: ", a)
 }
