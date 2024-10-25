@@ -1,4 +1,4 @@
-package syntaxsamples
+package language
 
 import (
 	"fmt"

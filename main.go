@@ -5,11 +5,11 @@ import (
 	"go-training/concurrency"
 	"go-training/datastructures"
 	"go-training/errorhandling"
+	"go-training/language"
 	"go-training/logging"
 	"go-training/mathsamples"
 	"go-training/person"
 	"go-training/saiyan"
-	"go-training/syntaxsamples"
 	"os"
 )
 
@@ -53,9 +53,9 @@ func main() {
 	errorhandling.ParseAndPrintNumberOrLogError("234")
 	errorhandling.ParseAndPrintNumberOrLogError("hello")
 	fmt.Println("ERROR:", errorhandling.Process(0))
-	syntaxsamples.Hello()
+	language.Hello()
 	concurrency.HelloFromConcurrency()
-	fmt.Println("Sum of 2.0 and 3.0 is", syntaxsamples.NewCalculator().Sum(2.0, 3.0))
+	fmt.Println("Sum of 2.0 and 3.0 is", language.NewCalculator().Sum(2.0, 3.0))
 	//errorhandling.ScanInput()
 	//written, err := filesystem.CopyFile("Hello", "There")
 	//fmt.Println("File copying result:", written, err)
