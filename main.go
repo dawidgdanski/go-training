@@ -56,6 +56,11 @@ func main() {
 	language.Hello()
 	concurrency.HelloFromConcurrency()
 	fmt.Println("Sum of 2.0 and 3.0 is", language.NewCalculator().Sum(2.0, 3.0))
+	var personPointer = language.MakePersonPointer("John", "Doe")
+	fmt.Println("Another person: " + personPointer.FirstName)
+
+	peopleSlice := language.CreatePeople(10_000_000)
+	fmt.Println("People Slice length: ", len(peopleSlice))
 	//errorhandling.ScanInput()
 	//written, err := filesystem.CopyFile("Hello", "There")
 	//fmt.Println("File copying result:", written, err)
