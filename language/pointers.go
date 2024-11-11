@@ -23,6 +23,12 @@ func init() {
 	fmt.Println("Before GrowSlice: ", secondSlice)
 	GrowSlice(secondSlice, "")
 	fmt.Println("After GrowSlice: ", secondSlice)
+
+	tree := &IntTree{}
+	tree.Insert(20).Insert(10).Insert(5).Insert(2).Insert(1)
+
+	fmt.Println("The IntTree contains 0:", tree.Contains(0))
+	fmt.Println("The IntTree contains 5", tree.Contains(5))
 }
 
 func accessingNilPointerRaisesError() {
@@ -77,7 +83,6 @@ func GrowSlice(slice []string, element string) {
 
 func CreatePeople(size int) []Person {
 	slice := make([]Person, size)
-
 	for index, _ := range slice {
 		suffix := string(rune(index + 1))
 		slice[index] = Person{
@@ -89,4 +94,34 @@ func CreatePeople(size int) []Person {
 	}
 
 	return slice
+}
+
+type IntTree struct {
+	val         int
+	left, right *IntTree
+}
+
+func (it *IntTree) Insert(val int) *IntTree {
+	if it == nil {
+		return &IntTree{val: val}
+	} else if val < it.val {
+		it.left = it.left.Insert(val)
+		return it
+	} else {
+		it.right = it.right.Insert(val)
+		return it
+	}
+}
+
+func (it *IntTree) Contains(val int) bool {
+	switch {
+	case it == nil:
+		return false
+	case val < it.val:
+		return it.left.Contains(val)
+	case val > it.val:
+		return it.right.Contains(val)
+	default:
+		return true
+	}
 }
