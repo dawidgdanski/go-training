@@ -9,6 +9,17 @@ func init() {
 	emptyInterfaceSample()
 }
 
+func emptyInterfaceAssignment() {
+	var i interface{}
+	i = 20
+	i = "hello"
+	i = struct {
+		FirstName string
+		LastName  string
+	}{"Fred", "Fredson"}
+	fmt.Println("Empty interface: ", i)
+}
+
 func emptyInterfaceSample() {
 	sum, _ := add(1, 2)
 	fmt.Println("SUM:", sum)
