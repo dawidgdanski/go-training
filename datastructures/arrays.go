@@ -8,8 +8,8 @@ import (
 
 func init() {
 	people := []Person{
-		{"Bob", "Bob LastName", 13},
-		{"Alice", "Alice LastName", 42},
+		{FirstName: "Bob", LastName: "Bob LastName", Age: 13},
+		{FirstName: "Alice", LastName: "Alice LastName", Age: 42},
 	}
 	fmt.Println("People: ", people)
 

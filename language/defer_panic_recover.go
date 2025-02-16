@@ -1,3 +1,4 @@
+// Package language nolint
 package language
 
 import "fmt"
@@ -17,7 +18,6 @@ func deferFirst() {
 	defer fmt.Println("deferFirst: defer", i)
 	i++
 	fmt.Println("deferFirst: finishing")
-	return
 }
 
 func deferStack() {

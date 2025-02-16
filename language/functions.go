@@ -28,7 +28,7 @@ func init() {
 	fmt.Println("Division", result, err)
 
 	closureCanModifyOuterVariable()
-	
+
 }
 
 type Add func(a int, b int) int

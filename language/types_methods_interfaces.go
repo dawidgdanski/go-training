@@ -135,8 +135,14 @@ func (controller Controller) SayHello(writer http.ResponseWriter, request *http.
 	message, err := controller.dataStore.SayHello(userID)
 	if err != nil {
 		writer.WriteHeader(http.StatusBadRequest)
-		writer.Write([]byte(err.Error()))
+		_, err := writer.Write([]byte(err.Error()))
+		if err != nil {
+			return
+		}
 	} else {
-		writer.Write([]byte(message))
+		_, err := writer.Write([]byte(message))
+		if err != nil {
+			return
+		}
 	}
 }
