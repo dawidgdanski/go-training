@@ -51,4 +51,6 @@ func add(a interface{}, b interface{}) (result interface{}, err any) {
 	default:
 		panic("Unsupported type of arguments identified: " + reflect.TypeOf(a).Name())
 	}
+
+	return result, err
 }

@@ -1,6 +1,7 @@
 package language
 
 import (
+	"cmp"
 	"errors"
 	"fmt"
 	"math"
@@ -39,6 +40,12 @@ func init() {
 
 	convert := Convert[int, int64](10)
 	fmt.Println(convert)
+
+	t1 := NewTree(cmp.Compare[int])
+	t1.Add(10)
+	t1.Add(20)
+	t1.Add(30)
+	fmt.Println("Tree contains", 30, ":", t1.Contains(30))
 }
 
 func Filter[T1 any](s []T1, f func(T1) bool) []T1 {
@@ -146,4 +153,62 @@ func divAndRemainderUserTypeFriendly[T UserTypeFriendlyInteger](num, denom T) (T
 
 func Convert[T1, T2 Integer](in T1) T2 {
 	return T2(in)
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+type OrderableFunc[T any] func(t1, t2 T) int
+
+type Tree[T any] struct {
+	f    OrderableFunc[T]
+	root *Node[T]
+}
+
+func NewTree[T any](f OrderableFunc[T]) *Tree[T] {
+	return &Tree[T]{
+		f: f,
+	}
+}
+
+func (t *Tree[T]) Add(val T) {
+	t.root = t.root.Add(t.f, val)
+}
+
+func (t *Tree[T]) Contains(val T) bool {
+	return t.root.Contains(t.f, val)
+}
+
+type Node[T any] struct {
+	val         T
+	left, right *Node[T]
+}
+
+func (t *Node[T]) Add(f OrderableFunc[T], val T) *Node[T] {
+	if t == nil {
+		return &Node[T]{val: val}
+	}
+
+	switch r := f(t.val, val); {
+	case r <= -1:
+		t.left = t.left.Add(f, val)
+	case r >= 1:
+		t.right = t.right.Add(f, val)
+	}
+
+	return t
+}
+
+func (n *Node[T]) Contains(f OrderableFunc[T], val T) bool {
+	if n == nil {
+		return false
+	}
+
+	switch r := f(n.val, val); {
+	case r <= -1:
+		return n.left.Contains(f, val)
+	case r >= 1:
+		return n.right.Contains(f, val)
+	}
+
+	return true
 }

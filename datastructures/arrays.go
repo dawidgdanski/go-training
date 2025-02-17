@@ -2,12 +2,12 @@ package datastructures
 
 import (
 	"fmt"
-	. "go-training/person"
+	"go-training/person"
 	"sort"
 )
 
 func init() {
-	people := []Person{
+	people := []person.Person{
 		{FirstName: "Bob", LastName: "Bob LastName", Age: 13},
 		{FirstName: "Alice", LastName: "Alice LastName", Age: 42},
 	}
