@@ -46,6 +46,14 @@ func init() {
 	t1.Add(20)
 	t1.Add(30)
 	fmt.Println("Tree contains", 30, ":", t1.Contains(30))
+
+	t2 := NewTree(person.Order)
+	t2.Add(person{"John", 20})
+	t2.Add(person{"Alice", 18})
+
+	if !t2.Contains(person{"John", 20}) {
+		panic("John was expected but could not be found.")
+	}
 }
 
 func Filter[T1 any](s []T1, f func(T1) bool) []T1 {
@@ -211,4 +219,18 @@ func (n *Node[T]) Contains(f OrderableFunc[T], val T) bool {
 	}
 
 	return true
+}
+
+type person struct {
+	Name string
+	Age  int
+}
+
+func (p person) Order(another person) int {
+	nameComparison := cmp.Compare(p.Name, another.Name)
+	if nameComparison == 0 {
+		return cmp.Compare(p.Age, another.Age)
+	} else {
+		return nameComparison
+	}
 }
