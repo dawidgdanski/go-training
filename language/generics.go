@@ -54,6 +54,8 @@ func init() {
 	if !t2.Contains(person{"John", 20}) {
 		panic("John was expected but could not be found.")
 	}
+	printPrintable(IntPrintable{1})
+	printPrintable(Float64Printable{2.012})
 }
 
 func Filter[T1 any](s []T1, f func(T1) bool) []T1 {
@@ -233,4 +235,43 @@ func (p person) Order(another person) int {
 	} else {
 		return nameComparison
 	}
+}
+
+type IntegerOrFloat interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64 |
+		~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 |
+		~float32 | ~float64
+}
+
+type Printable[T IntegerOrFloat] interface {
+	fmt.Stringer
+	GetValue() T
+}
+
+type IntPrintable struct {
+	Val int
+}
+
+func (i IntPrintable) GetValue() int {
+	return i.Val
+}
+
+func (i IntPrintable) String() string {
+	return fmt.Sprintf("IntPrintable=%d", i.Val)
+}
+
+type Float64Printable struct {
+	Val float64
+}
+
+func (f Float64Printable) GetValue() float64 {
+	return f.Val
+}
+
+func (f Float64Printable) String() string {
+	return fmt.Sprintf("Float64Printable=%f", f.Val)
+}
+
+func printPrintable[T IntegerOrFloat](val Printable[T]) {
+	fmt.Println(val.GetValue())
 }
