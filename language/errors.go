@@ -17,7 +17,31 @@ const (
 
 func init() {
 	openZipFile()
-	LoginAndGetData(uuid.New().String(), "pass123", "secret.txt")
+	data, err := LoginAndGetData(uuid.New().String(), "pass123", "secret.txt")
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
+	} else {
+		fmt.Println("Data: " + string(data))
+	}
+
+	err = GenerateErrorBroken(true)
+	fmt.Println("GenerateErrorBroken(true) returns non-nil error:", err != nil)
+	err = GenerateErrorBroken(false)
+	fmt.Println("GenerateErrorBroken(false) returns non-nil error:", err != nil)
+
+	err = GenerateErrorOk(false)
+	fmt.Println("GenerateErrorOk(false) returns non-nil error:", err != nil)
+	err = GenerateErrorOk(true)
+	fmt.Println("GenerateErrorOk(true) returns non-nil error:", err != nil)
+
+	var myErr StatusErr
+	errors.As(err, &myErr)
+	fmt.Println("myErr: " + myErr.Error())
+	if isStatusError := errors.Is(err, myErr); isStatusError {
+		fmt.Println("This is StatusErr: " + myErr.Error())
+	} else {
+		fmt.Println("This is not StatusError: " + myErr.Error())
+	}
 }
 
 func openZipFile() {
@@ -90,4 +114,28 @@ func login(uid string, password string) (string, error) {
 	} else {
 		return "", errors.New("Unsuccessful login")
 	}
+}
+
+func GenerateErrorBroken(flag bool) error {
+	var genErr StatusErr
+	if flag {
+		genErr = StatusErr{
+			Status:  InvalidLogin,
+			Message: "Test Message",
+		}
+	}
+
+	return genErr
+}
+
+func GenerateErrorOk(flag bool) error {
+	if flag {
+		return StatusErr{
+			InvalidLogin,
+			"Test Message",
+		}
+	} else {
+		return nil
+	}
+
 }
