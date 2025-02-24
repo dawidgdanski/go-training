@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
+	"os"
 
 	"github.com/google/uuid"
 )
@@ -41,6 +42,14 @@ func init() {
 		fmt.Println("This is StatusErr: " + myErr.Error())
 	} else {
 		fmt.Println("This is not StatusError: " + myErr.Error())
+	}
+
+	checkerError := fileChecker("not_here.txt")
+	if checkerError != nil {
+		fmt.Println(checkerError)
+		if wrappedError := errors.Unwrap(checkerError); wrappedError != nil {
+			fmt.Println(wrappedError)
+		}
 	}
 }
 
@@ -138,4 +147,18 @@ func GenerateErrorOk(flag bool) error {
 		return nil
 	}
 
+}
+
+// WRAPPING ERRORS
+
+func fileChecker(name string) error {
+	f, err := os.Open(name)
+	if err != nil {
+		return fmt.Errorf("fileChecker - error while opening file: %w", err) // error wrapping
+	}
+	err = f.Close()
+	if err != nil {
+		return fmt.Errorf("fileChecker - error while closing file: %w", err) // error wrapping
+	}
+	return nil
 }
