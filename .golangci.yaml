@@ -1,0 +1,30 @@
+issues:
+  exclude-rules:
+    - path: 'language/empty_interfaces.go'
+      linters:
+        - ineffassign
+        - unused
+    - path: 'language/empty_interfaces.go'
+      linters:
+        - ineffassign
+        - unused
+        - govet
+    - path: 'language/types_methods_interfaces.go'
+      linters:
+        - ineffassign
+        - unused
+    - path: 'language/errorhandling.go'
+      linters:
+        - unused
+    - path: 'language/defer_panic_recover.go'
+      linters:
+        - ineffassign
+    - path: 'language/pointers.go'
+      linters:
+        - unused
+    - path: 'errorhandling/stdin.go'
+      linters:
+        - unused
+    - path: 'language/pointers.go'
+      linters:
+        - gosimple
