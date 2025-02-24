@@ -54,6 +54,14 @@ func init() {
 
 	errorFromFunction := errorFunction()
 	fmt.Println(errorFromFunction)
+
+	validationError := validatePerson(Person{})
+	if validationError != nil {
+		fmt.Println(validationError)
+	}
+
+	mergeError := fmt.Errorf("first: %w, second: %w, third: %w", errors.New("first error"), errors.New("second error"), errors.New("third error"))
+	fmt.Println(mergeError)
 }
 
 func openZipFile() {
@@ -174,4 +182,19 @@ func errorFunction() error {
 	err := internalFunction()
 
 	return fmt.Errorf("errorFunction: %v", err) // err is not wrapped, only its message is copied
+}
+
+func validatePerson(person Person) error {
+	var errs []error
+	if len(person.FirstName) == 0 {
+		errs = append(errs, fmt.Errorf("first name is empty"))
+	}
+	if person.MiddleName == nil {
+		errs = append(errs, fmt.Errorf("middle name is empty"))
+	}
+	if len(person.LastName) == 0 {
+		errs = append(errs, fmt.Errorf("last name is empty"))
+	}
+
+	return errors.Join(errs...)
 }
