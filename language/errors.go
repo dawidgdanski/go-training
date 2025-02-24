@@ -51,6 +51,9 @@ func init() {
 			fmt.Println(wrappedError)
 		}
 	}
+
+	errorFromFunction := errorFunction()
+	fmt.Println(errorFromFunction)
 }
 
 func openZipFile() {
@@ -161,4 +164,14 @@ func fileChecker(name string) error {
 		return fmt.Errorf("fileChecker - error while closing file: %w", err) // error wrapping
 	}
 	return nil
+}
+
+func errorFunction() error {
+	internalFunction := func() error {
+		return errors.New("Internal Error")
+	}
+
+	err := internalFunction()
+
+	return fmt.Errorf("errorFunction: %v", err) // err is not wrapped, only its message is copied
 }
