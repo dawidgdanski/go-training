@@ -62,6 +62,8 @@ func init() {
 
 	mergeError := fmt.Errorf("first: %w, second: %w, third: %w", errors.New("first error"), errors.New("second error"), errors.New("third error"))
 	fmt.Println(mergeError)
+
+	detectInnerErrors()
 }
 
 func openZipFile() {
@@ -210,4 +212,20 @@ func (m MyError) Error() string {
 
 func (m MyError) Unwrap() []error {
 	return m.Errors
+}
+
+func detectInnerErrors() {
+	err := errorFunction()
+	switch err := err.(type) {
+	case interface{ Unwrap() error }:
+		innerErr := err.Unwrap()
+		fmt.Println(innerErr.Error())
+	case interface{ Unwrap() []error }:
+		innerErrs := err.Unwrap()
+		for _, innerErr := range innerErrs {
+			fmt.Println(innerErr.Error())
+		}
+	default:
+		fmt.Println(err)
+	}
 }
