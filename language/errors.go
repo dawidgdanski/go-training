@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"slices"
 
 	"github.com/google/uuid"
 )
@@ -50,6 +51,9 @@ func init() {
 		if wrappedError := errors.Unwrap(checkerError); wrappedError != nil {
 			fmt.Println(wrappedError)
 		}
+	}
+	if errors.Is(checkerError, os.ErrNotExist) {
+		fmt.Println("That file does not exist")
 	}
 
 	errorFromFunction := errorFunction()
@@ -202,12 +206,19 @@ func validatePerson(person Person) error {
 }
 
 type MyError struct {
-	Code   int
+	Codes  []int
 	Errors []error
 }
 
 func (m MyError) Error() string {
 	return errors.Join(m.Errors...).Error()
+}
+
+func (m MyError) Is(err error) bool {
+	if m2, ok := err.(MyError); ok {
+		return slices.Equal(m.Codes, m2.Codes)
+	}
+	return false
 }
 
 func (m MyError) Unwrap() []error {
