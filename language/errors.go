@@ -80,6 +80,11 @@ func init() {
 	if errors.As(anError, &myErrorAnother) {
 		fmt.Println("Errors: ", myErrorAnother.Unwrap())
 	}
+
+	for _, val := range []int{1, 2, 0, 6} {
+		fmt.Printf("div %d/%d\n", 60, val)
+		div60(val)
+	}
 }
 
 func openZipFile() {
@@ -258,4 +263,15 @@ func createMyError() error {
 		Errors: []error{errors.New("Hello")},
 		Codes:  []int{1, 2, 3},
 	}
+}
+
+func div60(i int) {
+	defer func() {
+		if v := recover(); v != nil {
+			fmt.Printf("Recovered from panic: %+v\n", v)
+		}
+
+	}()
+
+	fmt.Printf("%d\n", 60/i)
 }
