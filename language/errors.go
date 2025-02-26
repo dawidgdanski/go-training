@@ -68,6 +68,18 @@ func init() {
 	fmt.Println(mergeError)
 
 	detectInnerErrors()
+	anError := createMyError()
+	var myError MyError
+	if errors.As(anError, &myError) {
+		fmt.Println("MyError:", myError)
+	}
+
+	var myErrorAnother interface {
+		Unwrap() []error
+	}
+	if errors.As(anError, &myErrorAnother) {
+		fmt.Println("Errors: ", myErrorAnother.Unwrap())
+	}
 }
 
 func openZipFile() {
@@ -238,5 +250,12 @@ func detectInnerErrors() {
 		}
 	default:
 		fmt.Println(err)
+	}
+}
+
+func createMyError() error {
+	return MyError{
+		Errors: []error{errors.New("Hello")},
+		Codes:  []int{1, 2, 3},
 	}
 }
