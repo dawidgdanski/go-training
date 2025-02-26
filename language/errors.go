@@ -198,3 +198,16 @@ func validatePerson(person Person) error {
 
 	return errors.Join(errs...)
 }
+
+type MyError struct {
+	Code   int
+	Errors []error
+}
+
+func (m MyError) Error() string {
+	return errors.Join(m.Errors...).Error()
+}
+
+func (m MyError) Unwrap() []error {
+	return m.Errors
+}
