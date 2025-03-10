@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"go-training/concurrency"
 	"go-training/datastructures"
+	"go-training/embed"
 	"go-training/errorhandling"
 	"go-training/language"
 	"go-training/logging"
@@ -65,6 +66,7 @@ func main() {
 	//errorhandling.ScanInput()
 	//written, err := filesystem.CopyFile("Hello", "There")
 	//fmt.Println("File copying result:", written, err)
+	embed.PasswordCheck()
 }
 
 func printArguments() {
