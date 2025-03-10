@@ -20,7 +20,7 @@ func printFileIfExists() {
 	fileName := getFileNameArgument()
 	data, err := helpInfo.ReadFile("help/" + fileName)
 	if err != nil {
-		fmt.Printf("An attempt to open a file '%s' has failed", fileName)
+		fmt.Printf("An attempt to open a file '%s' has failed\n", fileName)
 		fmt.Println(err)
 	} else {
 		fmt.Println(string(data))

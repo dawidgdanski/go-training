@@ -68,6 +68,7 @@ func main() {
 	//fmt.Println("File copying result:", written, err)
 	embed.PasswordCheck()
 	embed.HelpFilesCheck()
+	embed.HiddenFilesCheck()
 }
 
 func printArguments() {
