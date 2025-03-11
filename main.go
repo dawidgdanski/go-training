@@ -7,6 +7,7 @@ import (
 	"go-training/datastructures"
 	"go-training/embed"
 	"go-training/errorhandling"
+	"go-training/generate"
 	"go-training/language"
 	"go-training/logging"
 	"go-training/mathsamples"
@@ -69,6 +70,7 @@ func main() {
 	embed.PasswordCheck()
 	embed.HelpFilesCheck()
 	embed.HiddenFilesCheck()
+	generate.ProtobufExample()
 }
 
 func printArguments() {
