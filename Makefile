@@ -8,7 +8,10 @@ fmt:
 vet: fmt
 		go vet ./...
 
-build: vet
+generate: vet
+		go generate ./...
+
+build: generate
 		go build
 
 clean:

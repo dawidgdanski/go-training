@@ -71,6 +71,7 @@ func main() {
 	embed.HelpFilesCheck()
 	embed.HiddenFilesCheck()
 	generate.ProtobufExample()
+	generate.DirectionWithStringGenerated()
 }
 
 func printArguments() {
