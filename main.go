@@ -72,6 +72,7 @@ func main() {
 	embed.HiddenFilesCheck()
 	generate.ProtobufExample()
 	generate.DirectionWithStringGenerated()
+	concurrency.DeadLockEliminated()
 }
 
 func printArguments() {

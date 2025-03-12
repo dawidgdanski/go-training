@@ -16,6 +16,9 @@ issues:
     - path: 'language/errorhandling.go'
       linters:
         - unused
+    - path: 'concurrency/deadlock.go'
+      linters:
+        - unused
     - path: 'language/defer_panic_recover.go'
       linters:
         - ineffassign
