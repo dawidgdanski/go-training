@@ -73,6 +73,7 @@ func main() {
 	generate.ProtobufExample()
 	generate.DirectionWithStringGenerated()
 	concurrency.DeadLockEliminated()
+	concurrency.Count(20)
 }
 
 func printArguments() {
