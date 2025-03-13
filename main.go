@@ -13,6 +13,7 @@ import (
 	"go-training/mathsamples"
 	"go-training/person"
 	"go-training/saiyan"
+	"math/rand"
 	"os"
 )
 
@@ -74,6 +75,13 @@ func main() {
 	generate.DirectionWithStringGenerated()
 	concurrency.DeadLockEliminated()
 	concurrency.Count(20)
+
+	const bufferSize = 20
+	channel := make(chan int, bufferSize)
+	for i := 0; i < bufferSize; i++ {
+		channel <- rand.New(rand.NewSource(124)).Int()
+	}
+	concurrency.ProcessChannel(channel)
 }
 
 func printArguments() {
