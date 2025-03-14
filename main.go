@@ -83,6 +83,7 @@ func main() {
 	}
 	concurrency.ProcessChannel(channel)
 	concurrency.TimeLimit()
+	concurrency.ProcessAndGather()
 	//concurrency.RunServer()
 }
 
