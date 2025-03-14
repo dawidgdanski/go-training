@@ -82,7 +82,8 @@ func main() {
 		channel <- rand.New(rand.NewSource(124)).Int()
 	}
 	concurrency.ProcessChannel(channel)
-	concurrency.RunServer()
+	concurrency.TimeLimit()
+	//concurrency.RunServer()
 }
 
 func printArguments() {
