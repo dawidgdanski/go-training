@@ -85,6 +85,8 @@ func main() {
 	concurrency.TimeLimit()
 	concurrency.ProcessAndGather()
 	//concurrency.RunServer()
+
+	language.CountLetters()
 }
 
 func printArguments() {
