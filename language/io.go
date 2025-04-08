@@ -2,11 +2,15 @@ package language
 
 import (
 	"compress/gzip"
+	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 	"log/slog"
+	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 func countLetters(r io.Reader) (map[string]int, error) {
@@ -72,4 +76,58 @@ func gzipCountLetters() error {
 	}
 	fmt.Println("my_data.txt.gz:", counts)
 	return nil
+}
+
+type TodoItem struct {
+	UserID    int    `json:"userId"`
+	ID        int    `json:"id"`
+	Title     string `json:"title"`
+	Completed bool   `json:"completed"`
+}
+
+func HttpClientExample() {
+	client := &http.Client{
+		Timeout: 30 * time.Second,
+	}
+
+	req := createTodoListRequest()
+
+	res, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			fmt.Println("Error while closing response body", err.Error())
+		}
+	}(res.Body)
+
+	if res.StatusCode != http.StatusOK {
+		panic(fmt.Sprintf("unexpected status: got %v", res.Status))
+	}
+	fmt.Println(res.Header.Get("Content-Type"))
+
+	data := decodeResponseBody(res)
+	fmt.Printf("%+v\n", data)
+}
+
+func decodeResponseBody(res *http.Response) TodoItem {
+	var data TodoItem
+	err := json.NewDecoder(res.Body).Decode(&data)
+	if err != nil {
+		panic(err)
+	}
+	return data
+}
+
+func createTodoListRequest() *http.Request {
+	req, err := http.NewRequestWithContext(context.Background(),
+		http.MethodGet, "https://jsonplaceholder.typicode.com/todos/1", nil)
+	if err != nil {
+		panic(err)
+	}
+	req.Header.Add("X-My-Client", "Learning Go")
+	return req
 }
