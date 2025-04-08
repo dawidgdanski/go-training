@@ -89,6 +89,7 @@ func main() {
 	language.CountLetters()
 	language.GzipCountLetters()
 	language.HttpClientExample()
+	language.JsonEncodingAndDecodingExample()
 }
 
 func printArguments() {
