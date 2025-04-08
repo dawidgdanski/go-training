@@ -87,6 +87,7 @@ func main() {
 	//concurrency.RunServer()
 
 	language.CountLetters()
+	language.GzipCountLetters()
 }
 
 func printArguments() {
