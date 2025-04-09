@@ -1,6 +1,7 @@
 package language
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"log/slog"
@@ -94,5 +95,32 @@ func terribleSecurityProvider(password string) func(http.Handler) http.Handler {
 			}
 			h.ServeHTTP(w, r)
 		})
+	}
+}
+
+type HelloHandler struct{}
+
+func (h HelloHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+
+	_, err := w.Write([]byte("Hello!\n"))
+	if err != nil {
+		panic(err)
+	}
+}
+
+func ServerListenAndServe() {
+	s := http.Server{
+		Addr:         ":8080",
+		ReadTimeout:  30 * time.Second,
+		WriteTimeout: 90 * time.Second,
+		IdleTimeout:  120 * time.Second,
+		Handler:      HelloHandler{},
+	}
+	slog.Info("Listen and Serve")
+	err := s.ListenAndServe()
+	if err != nil {
+		if !errors.Is(err, http.ErrServerClosed) {
+			panic(err)
+		}
 	}
 }
