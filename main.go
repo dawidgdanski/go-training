@@ -4,6 +4,7 @@ package main
 import (
 	"fmt"
 	"go-training/concurrency"
+	"go-training/contextsamples"
 	"go-training/datastructures"
 	"go-training/embed"
 	"go-training/errorhandling"
@@ -74,14 +75,12 @@ func main() {
 	generate.ProtobufExample()
 	generate.DirectionWithStringGenerated()
 	concurrency.DeadLockEliminated()
-	concurrency.Count(20)
 
 	const bufferSize = 20
 	channel := make(chan int, bufferSize)
 	for i := 0; i < bufferSize; i++ {
 		channel <- rand.New(rand.NewSource(124)).Int()
 	}
-	concurrency.ProcessChannel(channel)
 	concurrency.TimeLimit()
 	concurrency.ProcessAndGather()
 	//concurrency.RunServer()
@@ -92,6 +91,7 @@ func main() {
 	language.JsonEncodingAndDecodingExample()
 	// language.ServeMux()
 	// language.ServerListenAndServe()
+	contextsamples.ContextWithData()
 }
 
 func printArguments() {
