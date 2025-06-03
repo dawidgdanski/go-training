@@ -92,6 +92,10 @@ func main() {
 	// language.ServeMux()
 	// language.ServerListenAndServe()
 	contextsamples.ContextWithData()
+	contextsamples.ContextTimeout()
+	contextsamples.ContextRequest()
+	contextsamples.CalcWithTimeout()
+	contextsamples.ContextWithCancelAndCause()
 }
 
 func printArguments() {
