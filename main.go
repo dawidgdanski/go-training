@@ -10,6 +10,7 @@ import (
 	"go-training/errorhandling"
 	"go-training/generate"
 	"go-training/language"
+	"go-training/language/reflection"
 	"go-training/logging"
 	"go-training/mathsamples"
 	"go-training/person"
@@ -96,6 +97,7 @@ func main() {
 	contextsamples.ContextRequest()
 	contextsamples.CalcWithTimeout()
 	contextsamples.ContextWithCancelAndCause()
+	reflection.MakeTimedFunction()
 }
 
 func printArguments() {
